@@ -40,269 +40,53 @@
 <body class="bg-gray-100 text-gray-900">
   <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg relative overflow-hidden">
     <!-- Pantalla de Registro -->
-<div id="register-screen"
-  class="min-h-screen flex flex-col items-center justify-center p-5 bg-gradient-to-br from-purple-900 to-blue-800">
-  <!-- Logo y título -->
-  <div class="text-center mb-10">
-    <div class="text-white text-4xl font-bold mb-2 flex items-center justify-center">
-      <i class="fas fa-star mr-3 text-yellow-400 animate-pulse"></i>
-      <span>Talent<span class="text-blue-300">Hub</span></span>
-    </div>
-    <p class="text-blue-200">Conecta con el talento del futuro</p>
-  </div>
-
-  <!-- Tarjeta de registro -->
-  <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Crea tu cuenta</h2>
-
-    <!-- Botones de autenticación social -->
-    <div class="space-y-3 mb-6">
-      <button id="google-auth"
-        class="w-full flex items-center justify-center py-3 px-4 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google"
-          class="w-5 h-5 mr-3">
-        <span>Registrarse con Google</span>
-      </button>
-      <button id="wallet-connect"
-        class="w-full flex items-center justify-center py-3 px-4 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
-        <i class="fab fa-ethereum text-purple-600 mr-3"></i>
-        <span>Conectar Wallet</span>
-      </button>
-    </div>
-
-    <div class="flex items-center my-6">
-      <div class="flex-1 border-t border-gray-300"></div>
-      <span class="mx-4 text-gray-500 text-sm">o regístrate con email</span>
-      <div class="flex-1 border-t border-gray-300"></div>
-    </div>
-
-    <!-- Formulario de registro -->
-    <form id="register-form" class="space-y-4">
-      <div>
-        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
-        <input type="text" id="name" placeholder="Ingresa tu nombre" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition placeholder-gray-400">
+    <div id="register-screen" class="min-h-screen flex flex-col items-center justify-center p-5 gradient-bg">
+      <div class="text-white text-3xl font-bold mb-10 flex items-center">
+        <i class="fas fa-star mr-2 text-blue-300"></i> TalentHub
       </div>
 
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
-        <input type="email" id="email" placeholder="ejemplo@mail.com" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition placeholder-gray-400">
-      </div>
+      <div class="w-full bg-white p-6 rounded-xl shadow-lg">
+        <div class="mb-5">
+          <label class="block text-sm font-medium mb-1">Nombre completo</label>
+          <input type="text" id="name" placeholder="Ingresa tu nombre"
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-700 focus:ring-1 focus:ring-purple-100 outline-none transition">
+        </div>
 
-      <div>
-        <label for="user-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo de usuario</label>
-        <select id="user-type" required
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tZG93biI+PHBhdGggZD0ibTYgOSA2IDYgNi02Ii8+PC9zdmc+')] bg-no-repeat bg-[center_right_1rem]">
-          <option value="" disabled selected>Selecciona tu rol</option>
-          <option value="investor">Quiero invertir en talento</option>
-          <option value="talent">Soy un talento buscando inversión</option>
-        </select>
-      </div>
+        <div class="mb-5">
+          <label class="block text-sm font-medium mb-1">Correo electrónico</label>
+          <input type="email" id="email" placeholder="Ingresa tu correo"
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-700 focus:ring-1 focus:ring-purple-100 outline-none transition">
+        </div>
 
-      <div class="relative">
-        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-        <input type="password" id="password" placeholder="Mínimo 8 caracteres" required minlength="8"
-          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition placeholder-gray-400 pr-12">
-        <button type="button" id="toggle-password" class="absolute right-3 top-9 text-gray-500 hover:text-gray-700">
-          <i class="fas fa-eye"></i>
+        <div class="mb-5">
+          <label class="block text-sm font-medium mb-1">Tipo de usuario</label>
+          <select id="user-type"
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-700 focus:ring-1 focus:ring-purple-100 outline-none transition">
+            <option value="investor">Inversor</option>
+            <option value="talent">Talento</option>
+          </select>
+        </div>
+
+        <div class="mb-5 relative">
+          <label class="block text-sm font-medium mb-1">Contraseña</label>
+          <input type="password" id="password" placeholder="Crea una contraseña"
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-700 focus:ring-1 focus:ring-purple-100 outline-none transition pr-10">
+          <button id="toggle-password" class="absolute right-3 top-10 text-gray-500">
+            <i class="fas fa-eye"></i>
+          </button>
+        </div>
+
+        <button id="register-btn"
+          class="w-full gradient-bg text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300 mt-2">
+          <span id="register-text">Registrarse</span>
+          <i id="register-spinner" class="fas fa-circle-notch animate-spin ml-2 hidden"></i>
         </button>
-        <div id="password-strength" class="h-1 mt-1 bg-gray-200 rounded-full overflow-hidden hidden">
-          <div class="h-full bg-red-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+
+        <div class="text-center mt-5 text-gray-600 text-sm">
+          ¿Ya tienes una cuenta? <a href="#" id="login-link" class="text-purple-700 font-semibold">Inicia sesión</a>
         </div>
       </div>
-
-      <!-- Wallet conectada (oculto inicialmente) -->
-      <div id="wallet-connected-info" class="hidden bg-purple-50 border border-purple-200 rounded-xl p-3 mt-2">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <i class="fas fa-wallet text-purple-600 mr-2"></i>
-            <span class="text-sm font-medium text-purple-800">Wallet conectada</span>
-          </div>
-          <span id="wallet-short" class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full"></span>
-        </div>
-        <p id="wallet-full" class="text-xs text-gray-600 mt-1 break-all hidden"></p>
-      </div>
-
-      <button type="submit" id="register-btn"
-        class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-300 mt-2 flex items-center justify-center">
-        <span id="register-text">Crear cuenta</span>
-        <div id="register-spinner" class="ml-2 hidden">
-          <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      </button>
-    </form>
-
-    <div class="text-center mt-6 text-gray-600 text-sm">
-      ¿Ya tienes una cuenta?
-      <a href="#" id="login-link" class="text-purple-600 font-semibold hover:underline">Inicia sesión</a>
     </div>
-  </div>
-
-  <!-- Términos y condiciones -->
-  <p class="text-center text-blue-100 text-xs mt-6 max-w-md">
-    Al registrarte, aceptas nuestros <a href="#" class="underline">Términos de Servicio</a> y
-    <a href="#" class="underline">Política de Privacidad</a>. TalentHub usa tecnología blockchain para conectar
-    inversores con talento.
-  </p>
-</div>
-
-<!-- Modal de conexión de wallet -->
-<div id="wallet-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
-  <!-- Contenido del modal (similar al ejemplo anterior) -->
-</div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Elementos del DOM
-    const registerForm = document.getElementById('register-form');
-    const togglePassword = document.getElementById('toggle-password');
-    const passwordInput = document.getElementById('password');
-    const passwordStrength = document.getElementById('password-strength');
-    const registerBtn = document.getElementById('register-btn');
-    const registerText = document.getElementById('register-text');
-    const registerSpinner = document.getElementById('register-spinner');
-    const googleAuthBtn = document.getElementById('google-auth');
-    const walletConnectBtn = document.getElementById('wallet-connect');
-    const walletInfo = document.getElementById('wallet-connected-info');
-    const walletShort = document.getElementById('wallet-short');
-    const walletFull = document.getElementById('wallet-full');
-    const walletModal = document.getElementById('wallet-modal');
-
-    // Mostrar/ocultar contraseña
-    togglePassword.addEventListener('click', function () {
-      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-      passwordInput.setAttribute('type', type);
-      togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
-    });
-
-    // Validar fortaleza de contraseña
-    passwordInput.addEventListener('input', function () {
-      const password = passwordInput.value;
-      if (password.length > 0) {
-        passwordStrength.classList.remove('hidden');
-
-        // Calcular fortaleza (simplificado)
-        let strength = 0;
-        if (password.length >= 8) strength += 25;
-        if (/[A-Z]/.test(password)) strength += 25;
-        if (/\d/.test(password)) strength += 25;
-        if (/[^A-Za-z0-9]/.test(password)) strength += 25;
-
-        const strengthBar = passwordStrength.querySelector('div');
-        strengthBar.style.width = `${strength}%`;
-        strengthBar.className = `h-full rounded-full transition-all duration-300 ${strength < 50 ? 'bg-red-500' :
-            strength < 75 ? 'bg-yellow-500' : 'bg-green-500'
-          }`;
-      } else {
-        passwordStrength.classList.add('hidden');
-      }
-    });
-
-    // Simular autenticación con Google
-    googleAuthBtn.addEventListener('click', function () {
-      registerBtn.disabled = true;
-      registerText.textContent = 'Autenticando con Google...';
-      registerSpinner.classList.remove('hidden');
-
-      // Simular retraso de autenticación
-      setTimeout(() => {
-        // Datos simulados del usuario
-        document.getElementById('name').value = 'Usuario Google';
-        document.getElementById('email').value = 'usuario@gmail.com';
-        document.getElementById('user-type').value = 'investor';
-
-        registerText.textContent = 'Registrarse con Google';
-        registerSpinner.classList.add('hidden');
-        registerBtn.disabled = false;
-
-        // Mostrar mensaje de éxito
-        alert('Autenticación con Google exitosa. Completa los demás campos si es necesario.');
-      }, 1500);
-    });
-
-    // Conectar wallet
-    walletConnectBtn.addEventListener('click', function () {
-      // Mostrar modal de wallet (en una implementación real, esto conectaría con Web3)
-      walletModal.classList.remove('hidden');
-
-      // Simular conexión exitosa después de 2 segundos
-      setTimeout(() => {
-        const fakeAddress = '0x71C7656EC7ab88b098defB751B7401B5f6d8976F';
-        const shortAddress = `${fakeAddress.substring(0, 6)}...${fakeAddress.substring(38)}`;
-
-        walletInfo.classList.remove('hidden');
-        walletShort.textContent = shortAddress;
-        walletFull.textContent = fakeAddress;
-
-        // Cambiar estilo del botón
-        walletConnectBtn.innerHTML = '<i class="fas fa-check-circle text-green-500 mr-2"></i> Wallet conectada';
-        walletConnectBtn.classList.add('bg-green-50', 'border-green-200');
-        walletConnectBtn.classList.remove('hover:bg-gray-50');
-
-        walletModal.classList.add('hidden');
-      }, 2000);
-    });
-
-    // Enviar formulario
-    registerForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      // Validación básica
-      if (!passwordInput.value || passwordInput.value.length < 8) {
-        alert('La contraseña debe tener al menos 8 caracteres');
-        return;
-      }
-
-      // Mostrar loading
-      registerBtn.disabled = true;
-      registerText.textContent = 'Creando cuenta...';
-      registerSpinner.classList.remove('hidden');
-
-      // Simular registro exitoso
-      setTimeout(() => {
-        registerText.textContent = '¡Cuenta creada!';
-
-        // Redirigir después de 1 segundo
-        setTimeout(() => {
-          alert('Registro exitoso! Redirigiendo...');
-          // window.location.href = '/dashboard'; // En una app real
-        }, 1000);
-      }, 2000);
-    });
-
-    // Alternar visibilidad de dirección completa de wallet
-    walletInfo.addEventListener('click', function () {
-      walletFull.classList.toggle('hidden');
-    });
-  });
-</script>
-
-<style>
-  /* Animaciones personalizadas */
-  @keyframes pulse {
-
-    0%,
-    100% {
-      opacity: 1;
-    }
-
-    50% {
-      opacity: 0.5;
-    }
-  }
-
-  .animate-pulse {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  /* Estilo personalizado para el select */
-  select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-</style>
 
     <!-- Pantalla Principal -->
     <div id="main-screen" class="hidden flex-col min-h-screen">
