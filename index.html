@@ -2,28 +2,2071 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta name="description" content="Nucleo Linux UAGRM" />
-  <title>Nucleo Linux UAGRM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TalentHub - Invierte en Talentos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+  <style>
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-  <!-- Favicon -->
-  <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-  <!-- Boxicons - Añadimos Boxicons para usar los iconos -->
-  <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+    .animate-spin {
+      animation: spin 1s linear infinite;
+    }
 
-  <!-- Vincula las fuentes (si es necesario) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    .gradient-bg {
+      background: linear-gradient(135deg, #7D00FF, #00BFFF);
+    }
 
-  <script type="module" crossorigin src="/assets/index-779540d1.js"></script>
-  <link rel="stylesheet" href="/assets/index-b047c3d2.css">
+    .dark-gradient-bg {
+      background: linear-gradient(135deg, #090C1C, #7D00FF);
+    }
+
+    .talent-card-bg {
+      background: linear-gradient(45deg, #090C1C, #1D2D50);
+    }
+
+    .progress-bar-gradient {
+      background: linear-gradient(135deg, #7D00FF, #00BFFF);
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 text-gray-800 font-roboto">
-  <div id="root"></div>
+<body class="bg-gray-100 text-gray-900">
+  <div class="max-w-md mx-auto bg-white min-h-screen shadow-lg relative overflow-hidden">
+    <!-- Pantalla de Registro -->
+<div id="register-screen"
+  class="min-h-screen flex flex-col items-center justify-center p-5 bg-gradient-to-br from-purple-900 to-blue-800">
+  <!-- Logo y título -->
+  <div class="text-center mb-10">
+    <div class="text-white text-4xl font-bold mb-2 flex items-center justify-center">
+      <i class="fas fa-star mr-3 text-yellow-400 animate-pulse"></i>
+      <span>Talent<span class="text-blue-300">Hub</span></span>
+    </div>
+    <p class="text-blue-200">Conecta con el talento del futuro</p>
+  </div>
 
-  
+  <!-- Tarjeta de registro -->
+  <div class="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">Crea tu cuenta</h2>
+
+    <!-- Botones de autenticación social -->
+    <div class="space-y-3 mb-6">
+      <button id="google-auth"
+        class="w-full flex items-center justify-center py-3 px-4 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google"
+          class="w-5 h-5 mr-3">
+        <span>Registrarse con Google</span>
+      </button>
+      <button id="wallet-connect"
+        class="w-full flex items-center justify-center py-3 px-4 border border-gray-300 rounded-xl hover:bg-gray-50 transition">
+        <i class="fab fa-ethereum text-purple-600 mr-3"></i>
+        <span>Conectar Wallet</span>
+      </button>
+    </div>
+
+    <div class="flex items-center my-6">
+      <div class="flex-1 border-t border-gray-300"></div>
+      <span class="mx-4 text-gray-500 text-sm">o regístrate con email</span>
+      <div class="flex-1 border-t border-gray-300"></div>
+    </div>
+
+    <!-- Formulario de registro -->
+    <form id="register-form" class="space-y-4">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre completo</label>
+        <input type="text" id="name" placeholder="Ingresa tu nombre" required
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition placeholder-gray-400">
+      </div>
+
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo electrónico</label>
+        <input type="email" id="email" placeholder="ejemplo@mail.com" required
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition placeholder-gray-400">
+      </div>
+
+      <div>
+        <label for="user-type" class="block text-sm font-medium text-gray-700 mb-1">Tipo de usuario</label>
+        <select id="user-type" required
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition appearance-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tZG93biI+PHBhdGggZD0ibTYgOSA2IDYgNi02Ii8+PC9zdmc+')] bg-no-repeat bg-[center_right_1rem]">
+          <option value="" disabled selected>Selecciona tu rol</option>
+          <option value="investor">Quiero invertir en talento</option>
+          <option value="talent">Soy un talento buscando inversión</option>
+        </select>
+      </div>
+
+      <div class="relative">
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
+        <input type="password" id="password" placeholder="Mínimo 8 caracteres" required minlength="8"
+          class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 outline-none transition placeholder-gray-400 pr-12">
+        <button type="button" id="toggle-password" class="absolute right-3 top-9 text-gray-500 hover:text-gray-700">
+          <i class="fas fa-eye"></i>
+        </button>
+        <div id="password-strength" class="h-1 mt-1 bg-gray-200 rounded-full overflow-hidden hidden">
+          <div class="h-full bg-red-500 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Wallet conectada (oculto inicialmente) -->
+      <div id="wallet-connected-info" class="hidden bg-purple-50 border border-purple-200 rounded-xl p-3 mt-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <i class="fas fa-wallet text-purple-600 mr-2"></i>
+            <span class="text-sm font-medium text-purple-800">Wallet conectada</span>
+          </div>
+          <span id="wallet-short" class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full"></span>
+        </div>
+        <p id="wallet-full" class="text-xs text-gray-600 mt-1 break-all hidden"></p>
+      </div>
+
+      <button type="submit" id="register-btn"
+        class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition duration-300 mt-2 flex items-center justify-center">
+        <span id="register-text">Crear cuenta</span>
+        <div id="register-spinner" class="ml-2 hidden">
+          <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      </button>
+    </form>
+
+    <div class="text-center mt-6 text-gray-600 text-sm">
+      ¿Ya tienes una cuenta?
+      <a href="#" id="login-link" class="text-purple-600 font-semibold hover:underline">Inicia sesión</a>
+    </div>
+  </div>
+
+  <!-- Términos y condiciones -->
+  <p class="text-center text-blue-100 text-xs mt-6 max-w-md">
+    Al registrarte, aceptas nuestros <a href="#" class="underline">Términos de Servicio</a> y
+    <a href="#" class="underline">Política de Privacidad</a>. TalentHub usa tecnología blockchain para conectar
+    inversores con talento.
+  </p>
+</div>
+
+<!-- Modal de conexión de wallet -->
+<div id="wallet-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <!-- Contenido del modal (similar al ejemplo anterior) -->
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Elementos del DOM
+    const registerForm = document.getElementById('register-form');
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    const passwordStrength = document.getElementById('password-strength');
+    const registerBtn = document.getElementById('register-btn');
+    const registerText = document.getElementById('register-text');
+    const registerSpinner = document.getElementById('register-spinner');
+    const googleAuthBtn = document.getElementById('google-auth');
+    const walletConnectBtn = document.getElementById('wallet-connect');
+    const walletInfo = document.getElementById('wallet-connected-info');
+    const walletShort = document.getElementById('wallet-short');
+    const walletFull = document.getElementById('wallet-full');
+    const walletModal = document.getElementById('wallet-modal');
+
+    // Mostrar/ocultar contraseña
+    togglePassword.addEventListener('click', function () {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+
+    // Validar fortaleza de contraseña
+    passwordInput.addEventListener('input', function () {
+      const password = passwordInput.value;
+      if (password.length > 0) {
+        passwordStrength.classList.remove('hidden');
+
+        // Calcular fortaleza (simplificado)
+        let strength = 0;
+        if (password.length >= 8) strength += 25;
+        if (/[A-Z]/.test(password)) strength += 25;
+        if (/\d/.test(password)) strength += 25;
+        if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+
+        const strengthBar = passwordStrength.querySelector('div');
+        strengthBar.style.width = `${strength}%`;
+        strengthBar.className = `h-full rounded-full transition-all duration-300 ${strength < 50 ? 'bg-red-500' :
+            strength < 75 ? 'bg-yellow-500' : 'bg-green-500'
+          }`;
+      } else {
+        passwordStrength.classList.add('hidden');
+      }
+    });
+
+    // Simular autenticación con Google
+    googleAuthBtn.addEventListener('click', function () {
+      registerBtn.disabled = true;
+      registerText.textContent = 'Autenticando con Google...';
+      registerSpinner.classList.remove('hidden');
+
+      // Simular retraso de autenticación
+      setTimeout(() => {
+        // Datos simulados del usuario
+        document.getElementById('name').value = 'Usuario Google';
+        document.getElementById('email').value = 'usuario@gmail.com';
+        document.getElementById('user-type').value = 'investor';
+
+        registerText.textContent = 'Registrarse con Google';
+        registerSpinner.classList.add('hidden');
+        registerBtn.disabled = false;
+
+        // Mostrar mensaje de éxito
+        alert('Autenticación con Google exitosa. Completa los demás campos si es necesario.');
+      }, 1500);
+    });
+
+    // Conectar wallet
+    walletConnectBtn.addEventListener('click', function () {
+      // Mostrar modal de wallet (en una implementación real, esto conectaría con Web3)
+      walletModal.classList.remove('hidden');
+
+      // Simular conexión exitosa después de 2 segundos
+      setTimeout(() => {
+        const fakeAddress = '0x71C7656EC7ab88b098defB751B7401B5f6d8976F';
+        const shortAddress = `${fakeAddress.substring(0, 6)}...${fakeAddress.substring(38)}`;
+
+        walletInfo.classList.remove('hidden');
+        walletShort.textContent = shortAddress;
+        walletFull.textContent = fakeAddress;
+
+        // Cambiar estilo del botón
+        walletConnectBtn.innerHTML = '<i class="fas fa-check-circle text-green-500 mr-2"></i> Wallet conectada';
+        walletConnectBtn.classList.add('bg-green-50', 'border-green-200');
+        walletConnectBtn.classList.remove('hover:bg-gray-50');
+
+        walletModal.classList.add('hidden');
+      }, 2000);
+    });
+
+    // Enviar formulario
+    registerForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Validación básica
+      if (!passwordInput.value || passwordInput.value.length < 8) {
+        alert('La contraseña debe tener al menos 8 caracteres');
+        return;
+      }
+
+      // Mostrar loading
+      registerBtn.disabled = true;
+      registerText.textContent = 'Creando cuenta...';
+      registerSpinner.classList.remove('hidden');
+
+      // Simular registro exitoso
+      setTimeout(() => {
+        registerText.textContent = '¡Cuenta creada!';
+
+        // Redirigir después de 1 segundo
+        setTimeout(() => {
+          alert('Registro exitoso! Redirigiendo...');
+          // window.location.href = '/dashboard'; // En una app real
+        }, 1000);
+      }, 2000);
+    });
+
+    // Alternar visibilidad de dirección completa de wallet
+    walletInfo.addEventListener('click', function () {
+      walletFull.classList.toggle('hidden');
+    });
+  });
+</script>
+
+<style>
+  /* Animaciones personalizadas */
+  @keyframes pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Estilo personalizado para el select */
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+</style>
+
+    <!-- Pantalla Principal -->
+    <div id="main-screen" class="hidden flex-col min-h-screen">
+      <div class="dark-gradient-bg text-white p-5 flex justify-between items-center shadow-md">
+        <div class="font-semibold text-xl">Inicio</div>
+        <div class="flex items-center">
+          <div id="wallet-indicator"
+            class="flex items-center gap-1 text-xs bg-blue-100 bg-opacity-10 px-3 py-1 rounded-full mr-3 text-blue-300">
+            <i class="fas fa-wallet"></i>
+            <span>No conectada</span>
+          </div>
+          <div
+            class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-purple-700 font-bold cursor-pointer hover:scale-105 transition">
+            JP</div>
+        </div>
+      </div>
+
+
+<div class="min-h-screen bg-gray-100 pb-20">
+
+
+
+    <!-- Resumen de inversiones -->
+    <div class="mx-2 mt-4 p-2 bg-white rounded-xl shadow-md bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-5 text-white mb-6 shadow-lg">
+      <div class="flex justify-between items-center">
+        <div>
+          <p class="text-sm opacity-80">Total invertido</p>
+          <p class="text-2xl font-bold">$6,700</p>
+        </div>
+        <div>
+          <p class="text-sm opacity-80">Retorno promedio</p>
+          <p class="text-2xl font-bold">+28.3%</p>
+        </div>
+        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+          <i class="fas fa-chart-line text-xl"></i>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- Sección de talentos destacados -->
+      <div class="p-5">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="font-semibold">Talentos Destacados</h2>
+          <span class="text-purple-700 text-xs font-medium cursor-pointer">Ver todos</span>
+        </div>
+
+        <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+          <div
+            class="talent-card-bg min-w-[180px] h-[220px] rounded-xl p-4 text-white flex flex-col justify-between bg-cover bg-center relative overflow-hidden"
+            style="background-image: url('https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
+            <div class="bg-purple-700 bg-opacity-70 px-2 py-1 rounded-full text-xs self-start relative z-10">Música
+            </div>
+            <div class="relative z-10">
+              <div class="font-semibold">María Rodríguez</div>
+              <div class="flex justify-between mt-3 text-sm">
+                <div class="text-center">
+                  <div>$12,450</div>
+                  <div class="text-xs opacity-80">Invertido</div>
+                </div>
+                <div class="text-center">
+                  <div>+28%</div>
+                  <div class="text-xs opacity-80">Rendimiento</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="talent-card-bg min-w-[180px] h-[220px] rounded-xl p-4 text-white flex flex-col justify-between bg-cover bg-center relative overflow-hidden"
+            style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
+            <div class="bg-purple-700 bg-opacity-70 px-2 py-1 rounded-full text-xs self-start relative z-10">Arte</div>
+            <div class="relative z-10">
+              <div class="font-semibold">Carlos Méndez</div>
+              <div class="flex justify-between mt-3 text-sm">
+                <div class="text-center">
+                  <div>$8,750</div>
+                  <div class="text-xs opacity-80">Invertido</div>
+                </div>
+                <div class="text-center">
+                  <div>+15%</div>
+                  <div class="text-xs opacity-80">Rendimiento</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="talent-card-bg min-w-[180px] h-[220px] rounded-xl p-4 text-white flex flex-col justify-between bg-cover bg-center relative overflow-hidden"
+            style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-black bg-opacity-40 z-0"></div>
+            <div class="bg-purple-700 bg-opacity-70 px-2 py-1 rounded-full text-xs self-start relative z-10">Deportes
+            </div>
+            <div class="relative z-10">
+              <div class="font-semibold">Luis Fernández</div>
+              <div class="flex justify-between mt-3 text-sm">
+                <div class="text-center">
+                  <div>$25,300</div>
+                  <div class="text-xs opacity-80">Invertido</div>
+                </div>
+                <div class="text-center">
+                  <div>+42%</div>
+                  <div class="text-xs opacity-80">Rendimiento</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<div class="p-5 pb-24 bg-gray-50 min-h-screen">
+  <!-- Título y filtros -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-2xl font-bold text-gray-800">Mis Inversiones</h2>
+  </div>
+
+
+  <!-- Lista de inversiones con scroll suave -->
+  <div class="space-y-4 overflow-y-auto pb-4" style="max-height: 65vh;">
+    <!-- Tarjeta de inversión 1 -->
+    <div
+      class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full bg-gray-100 bg-cover bg-center mr-3 shadow-inner"
+            style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80')">
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800">Carlos Méndez</h4>
+            <p class="text-gray-500 text-sm">Artista plástico · Nivel 3</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-purple-700 font-bold text-lg">$1,200</div>
+          <div class="text-green-500 text-xs font-medium flex items-center justify-end">
+            <i class="fas fa-arrow-up mr-1"></i> 15% retorno
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="flex justify-between text-xs text-gray-500 mb-1">
+          <span>Progreso del contrato</span>
+          <span>75% completado</span>
+        </div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full" style="width: 75%"></div>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+        <div class="text-xs">
+          <p class="text-gray-500">Invertido el: <span class="text-gray-700 font-medium">12/05/2023</span></p>
+          <p class="text-gray-500">Próximo pago: <span class="text-green-600 font-medium">15/09/2023</span></p>
+        </div>
+        <button class="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full hover:bg-purple-100 transition">
+          Detalles
+        </button>
+      </div>
+    </div>
+
+    <!-- Tarjeta de inversión 2 -->
+    <div
+      class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full bg-gray-100 bg-cover bg-center mr-3 shadow-inner"
+            style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80')">
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800">Luis Fernández</h4>
+            <p class="text-gray-500 text-sm">Futbolista · Nivel 2</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-purple-700 font-bold text-lg">$2,500</div>
+          <div class="text-green-500 text-xs font-medium flex items-center justify-end">
+            <i class="fas fa-arrow-up mr-1"></i> 42% retorno
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="flex justify-between text-xs text-gray-500 mb-1">
+          <span>Progreso del contrato</span>
+          <span>42% completado</span>
+        </div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full" style="width: 42%"></div>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+        <div class="text-xs">
+          <p class="text-gray-500">Invertido el: <span class="text-gray-700 font-medium">03/02/2023</span></p>
+          <p class="text-gray-500">Próximo pago: <span class="text-green-600 font-medium">05/10/2023</span></p>
+        </div>
+        <button class="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full hover:bg-purple-100 transition">
+          Detalles
+        </button>
+      </div>
+    </div>
+
+    <!-- Tarjeta de inversión 3 -->
+    <div
+      class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full bg-gray-100 bg-cover bg-center mr-3 shadow-inner"
+            style="background-image: url('https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80')">
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800">María Rodríguez</h4>
+            <p class="text-gray-500 text-sm">Cantante · Nivel 4</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-purple-700 font-bold text-lg">$3,000</div>
+          <div class="text-green-500 text-xs font-medium flex items-center justify-end">
+            <i class="fas fa-arrow-up mr-1"></i> 28% retorno
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="flex justify-between text-xs text-gray-500 mb-1">
+          <span>Progreso del contrato</span>
+          <span>28% completado</span>
+        </div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full" style="width: 28%"></div>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+        <div class="text-xs">
+          <p class="text-gray-500">Invertido el: <span class="text-gray-700 font-medium">20/06/2023</span></p>
+          <p class="text-gray-500">Próximo pago: <span class="text-green-600 font-medium">22/11/2023</span></p>
+        </div>
+        <button class="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full hover:bg-purple-100 transition">
+          Detalles
+        </button>
+      </div>
+    </div>
+
+    <!-- Tarjeta de inversión adicional para demostrar scroll -->
+    <div
+      class="bg-white rounded-xl p-5 shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full bg-gray-100 bg-cover bg-center mr-3 shadow-inner"
+            style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80')">
+          </div>
+          <div>
+            <h4 class="font-semibold text-gray-800">Ana Castillo</h4>
+            <p class="text-gray-500 text-sm">Bailarina · Nivel 3</p>
+          </div>
+        </div>
+        <div class="text-right">
+          <div class="text-purple-700 font-bold text-lg">$1,800</div>
+          <div class="text-green-500 text-xs font-medium flex items-center justify-end">
+            <i class="fas fa-arrow-up mr-1"></i> 33% retorno
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <div class="flex justify-between text-xs text-gray-500 mb-1">
+          <span>Progreso del contrato</span>
+          <span>60% completado</span>
+        </div>
+        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-gradient-to-r from-blue-400 to-purple-500 rounded-full" style="width: 60%"></div>
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+        <div class="text-xs">
+          <p class="text-gray-500">Invertido el: <span class="text-gray-700 font-medium">15/04/2023</span></p>
+          <p class="text-gray-500">Próximo pago: <span class="text-green-600 font-medium">18/10/2023</span></p>
+        </div>
+        <button class="text-xs bg-purple-50 text-purple-700 px-3 py-1 rounded-full hover:bg-purple-100 transition">
+          Detalles
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+      <!-- Barra de navegación -->
+      <nav class="flex justify-around py-3 bg-white border-t border-gray-200 fixed bottom-0 w-full max-w-md z-10">
+        <div id="nav-home"
+          class="flex flex-col items-center text-purple-700 bg-purple-100 px-3 py-1 rounded-xl -translate-y-1 transition">
+          <i class="fas fa-home text-lg mb-1"></i>
+          <div class="text-xs">Inicio</div>
+        </div>
+        <div id="nav-explore" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-search text-lg mb-1"></i>
+          <div class="text-xs">Explorar</div>
+        </div>
+        <div id="nav-portfolio" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-chart-line text-lg mb-1"></i>
+          <div class="text-xs">Portafolio</div>
+        </div>
+        <div id="nav-notifications" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-bell text-lg mb-1"></i>
+          <div class="text-xs">Notificaciones</div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Pantalla de Explorar -->
+    <div id="explore-screen" class="hidden flex-col min-h-screen">
+      <div class="p-5 bg-white border-b border-gray-200">
+        <input type="text"
+          class="w-full px-5 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-700 focus:ring-1 focus:ring-purple-100 outline-none transition"
+          placeholder="Buscar talentos...">
+      </div>
+
+      <div class="flex gap-2 p-4 overflow-x-auto scrollbar-hide">
+        <button
+          class="category-btn px-4 py-2 rounded-full bg-purple-700 text-white text-xs font-medium whitespace-nowrap">Todos</button>
+        <button
+          class="category-btn px-4 py-2 rounded-full bg-gray-100 text-gray-800 text-xs font-medium whitespace-nowrap">Música</button>
+        <button
+          class="category-btn px-4 py-2 rounded-full bg-gray-100 text-gray-800 text-xs font-medium whitespace-nowrap">Arte</button>
+        <button
+          class="category-btn px-4 py-2 rounded-full bg-gray-100 text-gray-800 text-xs font-medium whitespace-nowrap">Deportes</button>
+        <button
+          class="category-btn px-4 py-2 rounded-full bg-gray-100 text-gray-800 text-xs font-medium whitespace-nowrap">Literatura</button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3 p-4 flex-1 overflow-y-auto mb-16">
+        <div
+          class="talent-item bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition"
+          data-talent="maria-rodriguez">
+          <div class="h-32 bg-cover bg-center relative"
+            style="background-image: url('https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute top-2 right-2 bg-purple-700 text-white px-2 py-1 rounded-full text-xs">Música</div>
+          </div>
+          <div class="p-3">
+            <div class="font-semibold text-sm mb-1">María Rodríguez</div>
+            <div class="text-gray-500 text-xs mb-2 line-clamp-2">Cantante y compositora con 5 años de experiencia en la
+              escena musical independiente.</div>
+            <div class="flex justify-between text-xs">
+              <span>Valoración: <span class="text-purple-700 font-semibold">4.8★</span></span>
+              <span>Inversión: <span class="text-purple-700 font-semibold">$12,450</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="talent-item bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition"
+          data-talent="carlos-mendez">
+          <div class="h-32 bg-cover bg-center relative"
+            style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute top-2 right-2 bg-purple-700 text-white px-2 py-1 rounded-full text-xs">Arte</div>
+          </div>
+          <div class="p-3">
+            <div class="font-semibold text-sm mb-1">Carlos Méndez</div>
+            <div class="text-gray-500 text-xs mb-2 line-clamp-2">Artista plástico especializado en muralismo urbano y
+              arte digital.</div>
+            <div class="flex justify-between text-xs">
+              <span>Valoración: <span class="text-purple-700 font-semibold">4.6★</span></span>
+              <span>Inversión: <span class="text-purple-700 font-semibold">$8,750</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="talent-item bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition"
+          data-talent="luis-fernandez">
+          <div class="h-32 bg-cover bg-center relative"
+            style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute top-2 right-2 bg-purple-700 text-white px-2 py-1 rounded-full text-xs">Deportes</div>
+          </div>
+          <div class="p-3">
+            <div class="font-semibold text-sm mb-1">Luis Fernández</div>
+            <div class="text-gray-500 text-xs mb-2 line-clamp-2">Joven futbolista con proyección internacional,
+              actualmente en divisiones menores.</div>
+            <div class="flex justify-between text-xs">
+              <span>Valoración: <span class="text-purple-700 font-semibold">4.9★</span></span>
+              <span>Inversión: <span class="text-purple-700 font-semibold">$25,300</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="talent-item bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition"
+          data-talent="ana-gomez">
+          <div class="h-32 bg-cover bg-center relative"
+            style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute top-2 right-2 bg-purple-700 text-white px-2 py-1 rounded-full text-xs">Danza</div>
+          </div>
+          <div class="p-3">
+            <div class="font-semibold text-sm mb-1">Ana Gómez</div>
+            <div class="text-gray-500 text-xs mb-2 line-clamp-2">Bailarina profesional con formación clásica y
+              contemporánea.</div>
+            <div class="flex justify-between text-xs">
+              <span>Valoración: <span class="text-purple-700 font-semibold">4.7★</span></span>
+              <span>Inversión: <span class="text-purple-700 font-semibold">$6,200</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="talent-item bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition"
+          data-talent="javier-lopez">
+          <div class="h-32 bg-cover bg-center relative"
+            style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute top-2 right-2 bg-purple-700 text-white px-2 py-1 rounded-full text-xs">Cine</div>
+          </div>
+          <div class="p-3">
+            <div class="font-semibold text-sm mb-1">Javier López</div>
+            <div class="text-gray-500 text-xs mb-2 line-clamp-2">Director de cine independiente con 3 cortometrajes
+              premiados.</div>
+            <div class="flex justify-between text-xs">
+              <span>Valoración: <span class="text-purple-700 font-semibold">4.5★</span></span>
+              <span>Inversión: <span class="text-purple-700 font-semibold">$10,100</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="talent-item bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-md hover:-translate-y-1 transition"
+          data-talent="sofia-martinez">
+          <div class="h-32 bg-cover bg-center relative"
+            style="background-image: url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+            <div class="absolute top-2 right-2 bg-purple-700 text-white px-2 py-1 rounded-full text-xs">Literatura</div>
+          </div>
+          <div class="p-3">
+            <div class="font-semibold text-sm mb-1">Sofía Martínez</div>
+            <div class="text-gray-500 text-xs mb-2 line-clamp-2">Escritora emergente con dos novelas publicadas y
+              reconocimiento crítico.</div>
+            <div class="flex justify-between text-xs">
+              <span>Valoración: <span class="text-purple-700 font-semibold">4.8★</span></span>
+              <span>Inversión: <span class="text-purple-700 font-semibold">$7,800</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de navegación -->
+      <nav class="flex justify-around py-3 bg-white border-t border-gray-200 fixed bottom-0 w-full max-w-md z-10">
+        <div id="nav-explore-home" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-home text-lg mb-1"></i>
+          <div class="text-xs">Inicio</div>
+        </div>
+        <div id="nav-explore-explore"
+          class="flex flex-col items-center text-purple-700 bg-purple-100 px-3 py-1 rounded-xl -translate-y-1 transition">
+          <i class="fas fa-search text-lg mb-1"></i>
+          <div class="text-xs">Explorar</div>
+        </div>
+        <div id="nav-explore-portfolio"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-chart-line text-lg mb-1"></i>
+          <div class="text-xs">Portafolio</div>
+        </div>
+        <div id="nav-explore-notifications"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-bell text-lg mb-1"></i>
+          <div class="text-xs">Notificaciones</div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Pantalla de Perfil de Talento -->
+    <div id="talent-screen" class="hidden flex-col min-h-screen">
+      <div class="h-48 bg-cover bg-center relative"
+        style="background-image: url('https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+        <button id="back-btn-talent"
+          class="absolute top-5 left-5 w-9 h-9 rounded-full bg-white bg-opacity-20 backdrop-blur-sm flex items-center justify-center text-white">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+
+      <div class="relative px-5 -mt-12 z-10 flex items-end mb-4">
+        <div class="w-24 h-24 rounded-full border-4 border-white bg-gray-100 bg-cover bg-center"
+          style="background-image: url('https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=60')">
+        </div>
+        <div class="ml-4 mb-2">
+          <div class="text-white text-xl font-bold">María Rodríguez</div>
+          <div class="text-white text-opacity-90">Cantante y compositora</div>
+        </div>
+      </div>
+
+      <div class="px-5 pb-20 flex-1 overflow-y-auto">
+        <div class="mb-5">
+          <h3 class="font-semibold mb-2">Biografía</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">María Rodríguez es una cantante y compositora con 5 años de
+            experiencia en la escena musical independiente. Ha lanzado 2 álbumes y participado en festivales
+            internacionales. Su estilo fusiona pop, jazz y música tradicional latinoamericana.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="bg-gray-100 rounded-xl p-3 text-center">
+            <div class="text-purple-700 font-bold text-lg">4.8★</div>
+            <div class="text-gray-500 text-xs">Valoración</div>
+          </div>
+          <div class="bg-gray-100 rounded-xl p-3 text-center">
+            <div class="text-purple-700 font-bold text-lg">$12,450</div>
+            <div class="text-gray-500 text-xs">Invertido</div>
+          </div>
+          <div class="bg-gray-100 rounded-xl p-3 text-center">
+            <div class="text-purple-700 font-bold text-lg">+28%</div>
+            <div class="text-gray-500 text-xs">Rendimiento</div>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 rounded-xl p-5 mb-5">
+          <h3 class="font-semibold mb-3">Oportunidad de Inversión</h3>
+          <div class="h-2 bg-gray-300 rounded-full mb-4 overflow-hidden">
+            <div class="progress-bar-gradient h-full rounded-full" style="width: 45%"></div>
+          </div>
+          <div class="flex justify-between mb-4">
+            <div class="text-center">
+              <div class="font-semibold">$12,450</div>
+              <div class="text-gray-500 text-xs">Recaudado</div>
+            </div>
+            <div class="text-center">
+              <div class="font-semibold">$25,000</div>
+              <div class="text-gray-500 text-xs">Meta</div>
+            </div>
+            <div class="text-center">
+              <div class="font-semibold">45%</div>
+              <div class="text-gray-500 text-xs">Completado</div>
+            </div>
+          </div>
+          <button id="invest-btn"
+            class="w-full gradient-bg text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition duration-300">
+            Invertir en María
+          </button>
+        </div>
+
+        <div class="mb-5">
+          <h3 class="font-semibold mb-2">Galería</h3>
+          <div class="grid grid-cols-3 gap-1">
+            <div class="aspect-square bg-cover bg-center rounded"
+              style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            </div>
+            <div class="aspect-square bg-cover bg-center rounded"
+              style="background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            </div>
+            <div class="aspect-square bg-cover bg-center rounded"
+              style="background-image: url('https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            </div>
+            <div class="aspect-square bg-cover bg-center rounded"
+              style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&auto=format&fit+crop&w=500&q=60')">
+            </div>
+            <div class="aspect-square bg-cover bg-center rounded"
+              style="background-image: url('https://images.unsplash.com/photo-1493225457124+a3eb161ffa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            </div>
+            <div class="aspect-square bg-cover bg-center rounded"
+              style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60')">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de navegación -->
+      <nav class="flex justify-around py-3 bg-white border-t border-gray-200 fixed bottom-0 w-full max-w-md z-10">
+        <div id="nav-talent-home" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-home text-lg mb-1"></i>
+          <div class="text-xs">Inicio</div>
+        </div>
+        <div id="nav-talent-explore" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-search text-lg mb-1"></i>
+          <div class="text-xs">Explorar</div>
+        </div>
+        <div id="nav-talent-portfolio" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-chart-line text-lg mb-1"></i>
+          <div class="text-xs">Portafolio</div>
+        </div>
+        <div id="nav-talent-notifications"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-bell text-lg mb-1"></i>
+          <div class="text-xs">Notificaciones</div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Pantalla de Portafolio -->
+    <div id="portfolio-screen" class="hidden flex-col min-h-screen">
+      <div class="dark-gradient-bg text-white p-5">
+        <div class="flex justify-between items-center mb-4">
+          <div class="font-semibold text-xl">Mi Portafolio</div>
+          <div class="flex items-center">
+            <button id="ai-recommendation-btn"
+              class="bg-white bg-opacity-10 px-3 py-1 rounded-lg text-sm mr-3 flex items-center">
+              <i class="fas fa-robot mr-1"></i> IA
+            </button>
+            <div
+              class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-purple-700 font-bold cursor-pointer hover:scale-105 transition">
+              JP</div>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-4">
+          <div class="text-2xl font-bold">$6,700</div>
+          <div class="text-green-400 text-sm">+18.5%</div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 mb-3">
+          <div class="bg-white bg-opacity-10 rounded-xl p-2 text-center">
+            <div class="font-semibold">3</div>
+            <div class="text-xs opacity-80">Talentos</div>
+          </div>
+          <div class="bg-white bg-opacity-10 rounded-xl p-2 text-center">
+            <div class="font-semibold">$1,200</div>
+            <div class="text-xs opacity-80">Ganancias</div>
+          </div>
+          <div class="bg-white bg-opacity-10 rounded-xl p-2 text-center">
+            <div class="font-semibold">28%</div>
+            <div class="text-xs opacity-80">Promedio</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-5 pb-20 flex-1 overflow-y-auto">
+        <div class="bg-gray-100 rounded-xl p-4 mb-4">
+          <h3 class="font-semibold mb-3">Análisis de Portafolio</h3>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="bg-white rounded-lg p-3 text-center">
+              <div class="text-green-500 font-semibold">+18.5%</div>
+              <div class="text-gray-500 text-xs">Rendimiento</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center">
+              <div class="font-semibold">3</div>
+              <div class="text-gray-500 text-xs">Talentos</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center">
+              <div class="text-green-500 font-semibold">+$1,200</div>
+              <div class="text-gray-500 text-xs">Ganancias</div>
+            </div>
+            <div class="bg-white rounded-lg p-3 text-center">
+              <div class="font-semibold">28%</div>
+              <div class="text-gray-500 text-xs">Retorno Prom.</div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="font-semibold mb-3">Mis Inversiones Activas</h3>
+
+        <div
+          class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-3 hover:shadow-md hover:-translate-y-1 transition">
+          <div class="flex justify-between items-center mb-3">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-100 bg-cover bg-center mr-3"
+                style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60')">
+              </div>
+              <div>
+                <h4 class="font-medium text-sm">Carlos Méndez</h4>
+                <p class="text-gray-500 text-xs">Artista plástico</p>
+              </div>
+            </div>
+            <div class="text-purple-700 font-semibold">$1,200</div>
+          </div>
+          <div class="h-1.5 bg-gray-200 rounded-full mb-3 overflow-hidden">
+            <div class="progress-bar-gradient h-full rounded-full" style="width: 75%"></div>
+          </div>
+          <div class="flex justify-between text-gray-500 text-xs">
+            <div>Retorno: +15%</div>
+            <div>Desde: 12/05/2023</div>
+          </div>
+        </div>
+
+        <div
+          class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-3 hover:shadow-md hover:-translate-y-1 transition">
+          <div class="flex justify-between items-center mb-3">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-100 bg-cover bg-center mr-3"
+                style="background-image: url('https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60')">
+              </div>
+              <div>
+                <h4 class="font-medium text-sm">Luis Fernández</h4>
+                <p class="text-gray-500 text-xs">Futbolista</p>
+              </div>
+            </div>
+            <div class="text-purple-700 font-semibold">$2,500</div>
+          </div>
+          <div class="h-1.5 bg-gray-200 rounded-full mb-3 overflow-hidden">
+            <div class="progress-bar-gradient h-full rounded-full" style="width: 42%"></div>
+          </div>
+          <div class="flex justify-between text-gray-500 text-xs">
+            <div>Retorno: +42%</div>
+            <div>Desde: 03/02/2023</div>
+          </div>
+        </div>
+
+        <div
+          class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-3 hover:shadow-md hover:-translate-y-1 transition">
+          <div class="flex justify-between items-center mb-3">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-100 bg-cover bg-center mr-3"
+                style="background-image: url('https://images.unsplash.com/photo-1549213783-8284d0336c4f?ixlib=rb-1.2.1&auto=format&fit+crop&w=100&q=60')">
+              </div>
+              <div>
+                <h4 class="font-medium text-sm">María Rodríguez</h4>
+                <p class="text-gray-500 text-xs">Cantante</p>
+              </div>
+            </div>
+            <div class="text-purple-700 font-semibold">$3,000</div>
+          </div>
+          <div class="h-1.5 bg-gray-200 rounded-full mb-3 overflow-hidden">
+            <div class="progress-bar-gradient h-full rounded-full" style="width: 28%"></div>
+          </div>
+          <div class="flex justify-between text-gray-500 text-xs">
+            <div>Retorno: +28%</div>
+            <div>Desde: 20/06/2023</div>
+          </div>
+        </div>
+
+        <h3 class="font-semibold mb-3 mt-6">Historial de Retiros</h3>
+
+        <div
+          class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-3 hover:shadow-md hover:-translate-y-1 transition">
+          <div class="flex justify-between items-center mb-3">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-100 bg-cover bg-center mr-3"
+                style="background-image: url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60')">
+              </div>
+              <div>
+                <h4 class="font-medium text-sm">Ana Gómez</h4>
+                <p class="text-gray-500 text-xs">Bailarina</p>
+              </div>
+            </div>
+            <div class="text-green-500 font-semibold">+$450</div>
+          </div>
+          <div class="flex justify-between text-gray-500 text-xs">
+            <div>Ganancias: +35%</div>
+            <div>Retirado: 15/07/2023</div>
+          </div>
+        </div>
+
+        <div
+          class="bg-white rounded-xl p-4 shadow-sm border border-gray-100 mb-3 hover:shadow-md hover:-translate-y-1 transition">
+          <div class="flex justify-between items-center mb-3">
+            <div class="flex items-center">
+              <div class="w-10 h-10 rounded-full bg-gray-100 bg-cover bg-center mr-3"
+                style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=60')">
+              </div>
+              <div>
+                <h4 class="font-medium text-sm">Javier López</h4>
+                <p class="text-gray-500 text-xs">Director de cine</p>
+              </div>
+            </div>
+            <div class="text-green-500 font-semibold">+$320</div>
+          </div>
+          <div class="flex justify-between text-gray-500 text-xs">
+            <div>Ganancias: +22%</div>
+            <div>Retirado: 02/05/2023</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de navegación -->
+      <nav class="flex justify-around py-3 bg-white border-t border-gray-200 fixed bottom-0 w-full max-w-md z-10">
+        <div id="nav-portfolio-home" class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-home text-lg mb-1"></i>
+          <div class="text-xs">Inicio</div>
+        </div>
+        <div id="nav-portfolio-explore"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-search text-lg mb-1"></i>
+          <div class="text-xs">Explorar</div>
+        </div>
+        <div id="nav-portfolio-portfolio"
+          class="flex flex-col items-center text-purple-700 bg-purple-100 px-3 py-1 rounded-xl -translate-y-1 transition">
+          <i class="fas fa-chart-line text-lg mb-1"></i>
+          <div class="text-xs">Portafolio</div>
+        </div>
+        <div id="nav-portfolio-notifications"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-bell text-lg mb-1"></i>
+          <div class="text-xs">Notificaciones</div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Pantalla de Notificaciones -->
+    <div id="notifications-screen" class="hidden flex-col min-h-screen">
+      <div class="dark-gradient-bg text-white p-5 text-center">
+        <div class="flex justify-between items-center">
+          <div class="font-semibold text-xl">Notificaciones</div>
+          <div
+            class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-purple-700 font-bold cursor-pointer hover:scale-105 transition">
+            JP</div>
+        </div>
+      </div>
+
+      <div class="p-5 pb-20 flex-1 overflow-y-auto">
+        <div class="flex items-start pb-4 border-b border-gray-200">
+          <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-purple-700 mr-3">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-medium mb-1">Actualización de inversión</h4>
+            <p class="text-gray-600 text-sm">Tu inversión en Luis Fernández ha aumentado un 5% esta semana</p>
+            <div class="text-gray-400 text-xs mt-1">Hace 2 horas</div>
+          </div>
+        </div>
+
+        <div class="flex items-start py-4 border-b border-gray-200">
+          <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-purple-700 mr-3">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-medium mb-1">Nuevo evento</h4>
+            <p class="text-gray-600 text-sm">María Rodríguez tiene un concierto el próximo sábado. ¡No te lo pierdas!
+            </p>
+            <div class="text-gray-400 text-xs mt-1">Ayer</div>
+          </div>
+        </div>
+
+        <div class="flex items-start py-4 border-b border-gray-200">
+          <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-purple-700 mr-3">
+            <i class="fas fa-money-bill-wave"></i>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-medium mb-1">Pago recibido</h4>
+            <p class="text-gray-600 text-sm">Has recibido $120 de ganancias por tu inversión en Ana Gómez</p>
+            <div class="text-gray-400 text-xs mt-1">15/07/2023</div>
+          </div>
+        </div>
+
+        <div class="flex items-start py-4 border-b border-gray-200">
+          <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-purple-700 mr-3">
+            <i class="fas fa-user-plus"></i>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-medium mb-1">Nuevo talento</h4>
+            <p class="text-gray-600 text-sm">Sofía Martínez, escritora emergente, se ha unido a TalentHub</p>
+            <div class="text-gray-400 text-xs mt-1">12/07/2023</div>
+          </div>
+        </div>
+
+        <div class="flex items-start py-4">
+          <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-purple-700 mr-3">
+            <i class="fas fa-trophy"></i>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-medium mb-1">Logro desbloqueado</h4>
+            <p class="text-gray-600 text-sm">¡Felicidades! Has alcanzado el nivel "Inversor Plata"</p>
+            <div class="text-gray-400 text-xs mt-1">10/07/2023</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de navegación -->
+      <nav class="flex justify-around py-3 bg-white border-t border-gray-200 fixed bottom-0 w-full max-w-md z-10">
+        <div id="nav-notifications-home"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-home text-lg mb-1"></i>
+          <div class="text-xs">Inicio</div>
+        </div>
+        <div id="nav-notifications-explore"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-search text-lg mb-1"></i>
+          <div class="text-xs">Explorar</div>
+        </div>
+        <div id="nav-notifications-portfolio"
+          class="flex flex-col items-center text-gray-500 px-3 py-1 rounded-xl transition">
+          <i class="fas fa-chart-line text-lg mb-1"></i>
+          <div class="text-xs">Portafolio</div>
+        </div>
+        <div id="nav-notifications-notifications"
+          class="flex flex-col items-center text-purple-700 bg-purple-100 px-3 py-1 rounded-xl -translate-y-1 transition">
+          <i class="fas fa-bell text-lg mb-1"></i>
+          <div class="text-xs">Notificaciones</div>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Modal de Conexión Wallet -->
+  <div id="wallet-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-6 w-full max-w-sm mx-4">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-lg font-semibold text-purple-700">Conectar Wallet</h3>
+        <button id="close-wallet" class="text-gray-500 text-xl">&times;</button>
+      </div>
+      <div class="text-center">
+        <div id="metamask-option"
+          class="flex items-center gap-3 p-4 border border-gray-300 rounded-xl mb-3 cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg" alt="MetaMask"
+            class="w-10 h-10">
+          <div>MetaMask</div>
+        </div>
+        <div id="walletconnect-option"
+          class="flex items-center gap-3 p-4 border border-gray-300 rounded-xl mb-3 cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition">
+          <img src="https://walletconnect.com/walletconnect-logo.png" alt="WalletConnect" class="w-10 h-10">
+          <div>WalletConnect</div>
+        </div>
+        <div id="coinbase-option"
+          class="flex items-center gap-3 p-4 border border-gray-300 rounded-xl cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Coinbase_Logo_2013.svg" alt="Coinbase Wallet"
+            class="w-10 h-10">
+          <div>Coinbase Wallet</div>
+        </div>
+        <div id="wallet-address" class="bg-gray-100 rounded-xl p-4 mt-4 hidden">
+          <p class="text-sm mb-1">Wallet conectada:</p>
+          <p id="connected-address" class="text-xs break-all font-mono"></p>
+          <button id="disconnect-wallet"
+            class="mt-3 w-full py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-200 transition">Desconectar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Inversión -->
+  <div id="investment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-6 w-full max-w-sm mx-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-lg font-semibold text-purple-700">Invertir en María Rodríguez</h3>
+        <button id="close-investment" class="text-gray-500 text-xl">&times;</button>
+      </div>
+      <div class="mb-6">
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <div id="option-100"
+            class="investment-option border border-purple-500 bg-purple-50 p-3 rounded-xl text-center cursor-pointer">
+            <div class="font-semibold">$100</div>
+            <div class="text-xs text-gray-500">Retorno estimado: $128</div>
+          </div>
+          <div id="option-250"
+            class="investment-option border border-gray-300 p-3 rounded-xl text-center cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition">
+            <div class="font-semibold">$250</div>
+            <div class="text-xs text-gray-500">Retorno estimado: $320</div>
+          </div>
+          <div id="option-500"
+            class="investment-option border border-gray-300 p-3 rounded-xl text-center cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition">
+            <div class="font-semibold">$500</div>
+            <div class="text-xs text-gray-500">Retorno estimado: $640</div>
+          </div>
+          <div id="option-1000"
+            class="investment-option border border-gray-300 p-3 rounded-xl text-center cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition">
+            <div class="font-semibold">$1,000</div>
+            <div class="text-xs text-gray-500">Retorno estimado: $1,280</div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">O ingresa un monto personalizado</label>
+          <input type="number" id="custom-investment" placeholder="Ingresa el monto"
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-700 focus:ring-1 focus:ring-purple-100 outline-none transition">
+        </div>
+
+        <div class="bg-gray-100 rounded-xl p-4 mb-4">
+          <div class="flex justify-between mb-2 text-sm">
+            <span>Monto a invertir:</span>
+            <span id="investment-amount" class="font-semibold">$100</span>
+          </div>
+          <div class="flex justify-between mb-2 text-sm">
+            <span>Retorno estimado (28%):</span>
+            <span id="estimated-return" class="font-semibold">$128</span>
+          </div>
+          <div class="flex justify-between mb-2 text-sm">
+            <span>Comisión de TalentHub (5%):</span>
+            <span id="platform-fee" class="font-semibold">$5</span>
+          </div>
+          <div class="flex justify-between pt-2 mt-2 border-t border-gray-300 text-sm">
+            <span>Total a pagar:</span>
+            <span id="total-payment" class="font-semibold text-purple-700">$100</span>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">Método de pago</label>
+          <select id="payment-method"
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl bg-gray-50 focus:border-purple-700 focus:ring-1 focus:ring-purple-100 outline-none transition">
+            <option value="usdt">USDT (BSC)</option>
+            <option value="card">Tarjeta de crédito/débito</option>
+            <option value="transfer">Transferencia bancaria</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex justify-end gap-3">
+        <button id="cancel-investment"
+          class="px-5 py-3 border border-gray-300 rounded-xl font-medium hover:bg-gray-100 transition">Cancelar</button>
+        <button id="confirm-investment"
+          class="px-5 py-3 gradient-bg text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition">
+          <span id="investment-text">Confirmar Inversión</span>
+          <i id="investment-spinner" class="fas fa-circle-notch animate-spin ml-2 hidden"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Pago con USDT -->
+  <div id="payment-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-6 w-full max-w-sm mx-4">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-lg font-semibold text-purple-700">Pago con USDT</h3>
+        <button id="close-payment" class="text-gray-500 text-xl">&times;</button>
+      </div>
+      <div class="mb-5">
+        <div class="flex flex-col md:flex-row gap-5 mb-5">
+          <div class="bg-white p-4 rounded-xl border border-gray-200 flex flex-col items-center">
+            <canvas id="payment-qr" width="200" height="200" class="mb-2"></canvas>
+            <div id="qr-amount" class="font-semibold text-purple-700">$100 USDT</div>
+          </div>
+          <div class="flex-1">
+            <div class="flex justify-between items-center mb-3 text-sm">
+              <span class="text-gray-600">Red:</span>
+              <span>BSC (Binance Smart Chain)</span>
+            </div>
+            <div class="flex justify-between items-center mb-3 text-sm">
+              <span class="text-gray-600">Dirección:</span>
+              <div class="flex items-center">
+                <span id="payment-address"
+                  class="font-mono text-xs break-all">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</span>
+                <button id="copy-address" class="ml-2 text-purple-700">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+            <div class="flex justify-between items-center mb-3 text-sm">
+              <span class="text-gray-600">Monto:</span>
+              <span id="payment-usdt-amount" class="font-semibold">100 USDT</span>
+            </div>
+            <div class="flex justify-between items-center text-sm">
+              <span class="text-gray-600">Tasa de cambio:</span>
+              <span>1 USDT = $1.00</span>
+            </div>
+          </div>
+        </div>
+        <div id="payment-status" class="bg-gray-100 rounded-xl p-5 text-center">
+          <div id="status-waiting">
+            <i class="fas fa-circle-notch fa-spin text-2xl text-purple-700 mb-2"></i>
+            <p class="font-medium">Esperando pago...</p>
+          </div>
+          <div id="status-success" class="hidden">
+            <i class="fas fa-check-circle text-2xl text-green-500 mb-2"></i>
+            <p class="font-medium">Pago confirmado!</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center gap-3">
+        <button id="cancel-payment"
+          class="px-5 py-3 border border-gray-300 rounded-xl font-medium hover:bg-gray-100 transition">Cancelar</button>
+        <button id="check-payment"
+          class="px-5 py-3 gradient-bg text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition hidden">Verificar
+          Transacción</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Inversión Exitosa -->
+  <div id="investment-success-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-6 w-full max-w-sm mx-4 text-center">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-lg font-semibold text-purple-700">¡Inversión Exitosa!</h3>
+        <button id="close-investment-success" class="text-gray-500 text-xl">&times;</button>
+      </div>
+      <div class="mb-5">
+        <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+        <p>¡Tu inversión en María Rodríguez se ha completado con éxito!</p>
+        <p class="font-bold my-3">Has invertido: <span id="success-amount" class="text-purple-700">$100</span></p>
+        <p class="text-sm text-gray-600">Recibirás actualizaciones periódicas sobre el progreso de tu inversión.</p>
+      </div>
+      <div class="flex justify-center">
+        <button id="close-investment-success-btn"
+          class="px-5 py-3 gradient-bg text-white rounded-xl font-medium shadow-lg hover:shadow-xl transition">Aceptar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Recomendaciones de IA -->
+  <div id="ai-recommendation-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-6 w-full max-w-sm mx-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center mb-5">
+        <h3 class="text-lg font-semibold text-purple-700">Recomendaciones de IA</h3>
+        <button id="close-ai" class="text-gray-500 text-xl">&times;</button>
+      </div>
+      <div class="mb-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="w-12 h-12 rounded-full gradient-bg flex items-center justify-center text-white text-xl">
+            <i class="fas fa-robot"></i>
+          </div>
+          <div>
+            <h4 class="font-semibold">Asistente de Inversiones</h4>
+            <p class="text-sm text-gray-500">Basado en tu historial y preferencias</p>
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <h4 class="font-semibold mb-3">Portafolio Recomendado</h4>
+          <div class="bg-gray-100 rounded-xl p-4">
+            <div class="mb-3">
+              <div class="flex justify-between mb-1 text-sm">
+                <span class="font-medium">María Rodríguez</span>
+                <span class="text-gray-600">30%</span>
+              </div>
+              <div class="h-2 bg-gray-300 rounded-full overflow-hidden">
+                <div class="progress-bar-gradient h-full rounded-full" style="width: 30%"></div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="flex justify-between mb-1 text-sm">
+                <span class="font-medium">Luis Fernández</span>
+                <span class="text-gray-600">25%</span>
+              </div>
+              <div class="h-2 bg-gray-300 rounded-full overflow-hidden">
+                <div class="progress-bar-gradient h-full rounded-full" style="width: 25%"></div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="flex justify-between mb-1 text-sm">
+                <span class="font-medium">Carlos Méndez</span>
+                <span class="text-gray-600">20%</span>
+              </div>
+              <div class="h-2 bg-gray-300 rounded-full overflow-hidden">
+                <div class="progress-bar-gradient h-full rounded-full" style="width: 20%"></div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <div class="flex justify-between mb-1 text-sm">
+                <span class="font-medium">Ana Gómez</span>
+                <span class="text-gray-600">15%</span>
+              </div>
+              <div class="h-2 bg-gray-300 rounded-full overflow-hidden">
+                <div class="progress-bar-gradient h-full rounded-full" style="width: 15%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1 text-sm">
+                <span class="font-medium">Sofía Martínez</span>
+                <span class="text-gray-600">10%</span>
+              </div>
+              <div class="h-2 bg-gray-300 rounded-full overflow-hidden">
+                <div class="progress-bar-gradient h-full rounded-full" style="width: 10%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <h4 class="font-semibold mb-2">Explicación de la Recomendación</h4>
+          <div class="text-sm text-gray-700 leading-relaxed">
+            <p class="mb-2">Basado en tu perfil de riesgo moderado y preferencia por talentos artísticos, nuestra IA ha
+              seleccionado este portafolio diversificado:</p>
+            <ul class="list-disc pl-5 mb-3">
+              <li class="mb-1"><strong>María Rodríguez</strong>: Alto potencial de crecimiento en música latina</li>
+              <li class="mb-1"><strong>Luis Fernández</strong>: Estabilidad comprobada en deportes</li>
+              <li><strong>Carlos Méndez</strong>: Tendencia alcista en arte digital</li>
+            </ul>
+            <p>Este portafolio tiene un retorno esperado del 22-28% anual.</p>
+          </div>
+        </div>
+      </div>
+      <button id="apply-recommendation"
+        class="w-full gradient-bg text-white py-4 rounded-xl font-semibold shadow-lg hover:shadow-xl transition">Aplicar
+        Recomendación</button>
+    </div>
+  </div>
+
+  <script>
+    // Elementos del DOM
+    const registerScreen = document.getElementById('register-screen');
+    const mainScreen = document.getElementById('main-screen');
+    const exploreScreen = document.getElementById('explore-screen');
+    const talentScreen = document.getElementById('talent-screen');
+    const portfolioScreen = document.getElementById('portfolio-screen');
+    const notificationsScreen = document.getElementById('notifications-screen');
+
+    // Botones de registro/login
+    const registerBtn = document.getElementById('register-btn');
+    const registerText = document.getElementById('register-text');
+    const registerSpinner = document.getElementById('register-spinner');
+    const loginLink = document.getElementById('login-link');
+    const togglePassword = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+
+    // Navegación principal
+    const navHome = document.getElementById('nav-home');
+    const navExplore = document.getElementById('nav-explore');
+    const navPortfolio = document.getElementById('nav-portfolio');
+    const navNotifications = document.getElementById('nav-notifications');
+
+    // Navegación desde explorar
+    const navExploreHome = document.getElementById('nav-explore-home');
+    const navExploreExplore = document.getElementById('nav-explore-explore');
+    const navExplorePortfolio = document.getElementById('nav-explore-portfolio');
+    const navExploreNotifications = document.getElementById('nav-explore-notifications');
+
+    // Navegación desde talento
+    const navTalentHome = document.getElementById('nav-talent-home');
+    const navTalentExplore = document.getElementById('nav-talent-explore');
+    const navTalentPortfolio = document.getElementById('nav-talent-portfolio');
+    const navTalentNotifications = document.getElementById('nav-talent-notifications');
+
+    // Navegación desde portafolio
+    const navPortfolioHome = document.getElementById('nav-portfolio-home');
+    const navPortfolioExplore = document.getElementById('nav-portfolio-explore');
+    const navPortfolioPortfolio = document.getElementById('nav-portfolio-portfolio');
+    const navPortfolioNotifications = document.getElementById('nav-portfolio-notifications');
+
+    // Navegación desde notificaciones
+    const navNotificationsHome = document.getElementById('nav-notifications-home');
+    const navNotificationsExplore = document.getElementById('nav-notifications-explore');
+    const navNotificationsPortfolio = document.getElementById('nav-notifications-portfolio');
+    const navNotificationsNotifications = document.getElementById('nav-notifications-notifications');
+
+    // Botón de inversión
+    const investBtn = document.getElementById('invest-btn');
+
+    // Botón de retroceso
+    const backBtnTalent = document.getElementById('back-btn-talent');
+
+    // Talentos en explorar
+    const talentItems = document.querySelectorAll('.talent-item');
+
+    // Modal de inversión
+    const investmentModal = document.getElementById('investment-modal');
+    const investmentOptions = document.querySelectorAll('.investment-option');
+    const option100 = document.getElementById('option-100');
+    const option250 = document.getElementById('option-250');
+    const option500 = document.getElementById('option-500');
+    const option1000 = document.getElementById('option-1000');
+    const customInvestment = document.getElementById('custom-investment');
+    const investmentAmount = document.getElementById('investment-amount');
+    const estimatedReturn = document.getElementById('estimated-return');
+    const platformFee = document.getElementById('platform-fee');
+    const totalPayment = document.getElementById('total-payment');
+    const confirmInvestment = document.getElementById('confirm-investment');
+    const investmentText = document.getElementById('investment-text');
+    const investmentSpinner = document.getElementById('investment-spinner');
+    const closeInvestment = document.getElementById('close-investment');
+    const cancelInvestment = document.getElementById('cancel-investment');
+
+    // Modal de wallet
+    const walletModal = document.getElementById('wallet-modal');
+    const closeWallet = document.getElementById('close-wallet');
+    const metamaskOption = document.getElementById('metamask-option');
+    const walletconnectOption = document.getElementById('walletconnect-option');
+    const coinbaseOption = document.getElementById('coinbase-option');
+    const walletAddress = document.getElementById('wallet-address');
+    const connectedAddress = document.getElementById('connected-address');
+    const disconnectWallet = document.getElementById('disconnect-wallet');
+    const walletIndicator = document.getElementById('wallet-indicator');
+
+    // Modal de pago
+    const paymentModal = document.getElementById('payment-modal');
+    const paymentQr = document.getElementById('payment-qr');
+    const paymentAddress = document.getElementById('payment-address');
+    const paymentUsdtAmount = document.getElementById('payment-usdt-amount');
+    const qrAmount = document.getElementById('qr-amount');
+    const copyAddress = document.getElementById('copy-address');
+    const paymentStatus = document.getElementById('payment-status');
+    const statusWaiting = document.getElementById('status-waiting');
+    const statusSuccess = document.getElementById('status-success');
+    const closePayment = document.getElementById('close-payment');
+    const cancelPayment = document.getElementById('cancel-payment');
+    const checkPayment = document.getElementById('check-payment');
+
+    // Modal de éxito
+    const investmentSuccessModal = document.getElementById('investment-success-modal');
+    const successAmount = document.getElementById('success-amount');
+    const closeInvestmentSuccess = document.getElementById('close-investment-success');
+    const closeInvestmentSuccessBtn = document.getElementById('close-investment-success-btn');
+
+    // Modal de IA
+    const aiModal = document.getElementById('ai-recommendation-modal');
+    const aiRecommendationBtn = document.getElementById('ai-recommendation-btn');
+    const closeAi = document.getElementById('close-ai');
+    const applyRecommendation = document.getElementById('apply-recommendation');
+
+    // Categorías
+    const categoryBtns = document.querySelectorAll('.category-btn');
+
+    // Variables de estado
+    let currentAccount = null;
+    let currentChainId = null;
+    const contractAddress = "0x742d35Cc6634C0532925a3b844Bc454e4438f44e";
+    const usdtContractAddress = "0x55d398326f99059fF775485246999027B3197955";
+
+    // Funciones para cambiar pantallas
+    function showRegisterScreen() {
+      registerScreen.classList.remove('hidden');
+      mainScreen.classList.add('hidden');
+      exploreScreen.classList.add('hidden');
+      talentScreen.classList.add('hidden');
+      portfolioScreen.classList.add('hidden');
+      notificationsScreen.classList.add('hidden');
+    }
+
+    function showMainScreen() {
+      registerScreen.classList.add('hidden');
+      mainScreen.classList.remove('hidden');
+      exploreScreen.classList.add('hidden');
+      talentScreen.classList.add('hidden');
+      portfolioScreen.classList.add('hidden');
+      notificationsScreen.classList.add('hidden');
+
+      updateNavActiveState('home');
+    }
+
+    function showExploreScreen() {
+      registerScreen.classList.add('hidden');
+      mainScreen.classList.add('hidden');
+      exploreScreen.classList.remove('hidden');
+      talentScreen.classList.add('hidden');
+      portfolioScreen.classList.add('hidden');
+      notificationsScreen.classList.add('hidden');
+
+      updateNavActiveState('explore');
+    }
+
+    function showTalentScreen() {
+      registerScreen.classList.add('hidden');
+      mainScreen.classList.add('hidden');
+      exploreScreen.classList.add('hidden');
+      talentScreen.classList.remove('hidden');
+      portfolioScreen.classList.add('hidden');
+      notificationsScreen.classList.add('hidden');
+    }
+
+    function showPortfolioScreen() {
+      registerScreen.classList.add('hidden');
+      mainScreen.classList.add('hidden');
+      exploreScreen.classList.add('hidden');
+      talentScreen.classList.add('hidden');
+      portfolioScreen.classList.remove('hidden');
+      notificationsScreen.classList.add('hidden');
+
+      updateNavActiveState('portfolio');
+    }
+
+    function showNotificationsScreen() {
+      registerScreen.classList.add('hidden');
+      mainScreen.classList.add('hidden');
+      exploreScreen.classList.add('hidden');
+      talentScreen.classList.add('hidden');
+      portfolioScreen.classList.add('hidden');
+      notificationsScreen.classList.remove('hidden');
+
+      updateNavActiveState('notifications');
+    }
+
+    function updateNavActiveState(screen) {
+      // Reset all nav items
+      document.querySelectorAll('.nav-item').forEach(item => {
+        item.classList.remove('text-purple-700', 'bg-purple-100', '-translate-y-1');
+        item.classList.add('text-gray-500');
+      });
+
+      // Set active state based on screen
+      switch (screen) {
+        case 'home':
+          navHome.classList.remove('text-gray-500');
+          navHome.classList.add('text-purple-700', 'bg-purple-100', '-translate-y-1');
+          break;
+        case 'explore':
+          navExplore.classList.remove('text-gray-500');
+          navExplore.classList.add('text-purple-700', 'bg-purple-100', '-translate-y-1');
+          navExploreExplore.classList.remove('text-gray-500');
+          navExploreExplore.classList.add('text-purple-700', 'bg-purple-100', '-translate-y-1');
+          break;
+        case 'portfolio':
+          navPortfolio.classList.remove('text-gray-500');
+          navPortfolio.classList.add('text-purple-700', 'bg-purple-100', '-translate-y-1');
+          navPortfolioPortfolio.classList.remove('text-gray-500');
+          navPortfolioPortfolio.classList.add('text-purple-700', 'bg-purple-100', '-translate-y-1');
+          break;
+        case 'notifications':
+          navNotifications.classList.remove('text-gray-500');
+          navNotifications.classList.add('text-purple-700', 'bg-purple-100', '-translate-y-1');
+          navNotificationsNotifications.classList.remove('text-gray-500');
+          navNotificationsNotifications.classList.add('text-purple-700', 'bg-purple-100', '-translate-y-1');
+          break;
+      }
+    }
+
+    // Función para actualizar el resumen de inversión
+    function updateInvestmentSummary(amount) {
+      const returnRate = 0.28; // 28% de retorno estimado
+      const platformRate = 0.05; // 5% de comisión
+
+      const estimated = amount * (1 + returnRate);
+      const fee = amount * platformRate;
+      const total = amount;
+
+      investmentAmount.textContent = `$${amount.toFixed(2)}`;
+      estimatedReturn.textContent = `$${estimated.toFixed(2)}`;
+      platformFee.textContent = `$${fee.toFixed(2)}`;
+      totalPayment.textContent = `$${total.toFixed(2)}`;
+
+      // Actualizar también para el modal de pago
+      paymentUsdtAmount.textContent = `${amount} USDT`;
+      qrAmount.textContent = `$${amount} USDT`;
+      successAmount.textContent = `$${amount} USDT`;
+    }
+
+    // Función para mostrar carga en botones
+    function showLoading(buttonType) {
+      switch (buttonType) {
+        case 'register':
+          registerText.classList.add('hidden');
+          registerSpinner.classList.remove('hidden');
+          break;
+        case 'investment':
+          investmentText.classList.add('hidden');
+          investmentSpinner.classList.remove('hidden');
+          break;
+      }
+    }
+
+    // Función para ocultar carga en botones
+    function hideLoading(buttonType) {
+      switch (buttonType) {
+        case 'register':
+          registerText.classList.remove('hidden');
+          registerSpinner.classList.add('hidden');
+          break;
+        case 'investment':
+          investmentText.classList.remove('hidden');
+          investmentSpinner.classList.add('hidden');
+          break;
+      }
+    }
+
+    // Función para conectar con MetaMask
+    async function connectMetaMask() {
+      try {
+        if (!window.ethereum) {
+          alert('Por favor instala MetaMask para continuar');
+          return;
+        }
+
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        currentAccount = accounts[0];
+        currentChainId = await window.ethereum.request({ method: 'eth_chainId' });
+
+        updateWalletUI();
+        walletModal.classList.add('hidden');
+
+        // Escuchar cambios de cuenta
+        window.ethereum.on('accountsChanged', (newAccounts) => {
+          currentAccount = newAccounts[0] || null;
+          updateWalletUI();
+        });
+
+        // Escuchar cambios de red
+        window.ethereum.on('chainChanged', (chainId) => {
+          currentChainId = chainId;
+          checkNetwork();
+        });
+
+        checkNetwork();
+
+      } catch (error) {
+        console.error("Error connecting to MetaMask:", error);
+        alert('Error al conectar con MetaMask: ' + error.message);
+      }
+    }
+
+    // Función para verificar la red correcta (Binance Smart Chain)
+    function checkNetwork() {
+      const bscChainId = '0x38'; // Binance Smart Chain Mainnet
+      if (currentChainId !== bscChainId) {
+        alert('Por favor cambia a Binance Smart Chain en tu wallet');
+        return false;
+      }
+      return true;
+    }
+
+    // Función para actualizar la UI de la wallet
+    function updateWalletUI() {
+      if (currentAccount) {
+        const shortAddress = `${currentAccount.substring(0, 6)}...${currentAccount.substring(38)}`;
+        walletIndicator.innerHTML = `<i class="fas fa-wallet"></i><span>${shortAddress}</span>`;
+        walletAddress.classList.remove('hidden');
+        connectedAddress.textContent = currentAccount;
+      } else {
+        walletIndicator.innerHTML = '<i class="fas fa-wallet"></i><span>No conectada</span>';
+        walletAddress.classList.add('hidden');
+      }
+    }
+
+    // Función para desconectar wallet
+    function disconnectWalletHandler() {
+      currentAccount = null;
+      currentChainId = null;
+      updateWalletUI();
+    }
+
+    // Función para generar QR de pago
+    function generatePaymentQR(amount) {
+      // Limpiar QR anterior si existe
+      paymentQr.innerHTML = '';
+
+      new QRCode(paymentQr, {
+        text: `ethereum:${contractAddress}?value=${amount}&contract=${usdtContractAddress}`,
+        width: 200,
+        height: 200,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    }
+
+    // Función para verificar el pago
+    async function checkPaymentStatus(amount) {
+      if (!currentAccount) {
+        alert('Por favor conecta tu wallet primero');
+        return false;
+      }
+
+      try {
+        // Simular verificación de pago
+        statusWaiting.classList.add('hidden');
+        statusSuccess.classList.remove('hidden');
+        checkPayment.classList.add('hidden');
+
+        // Cerrar el modal después de 2 segundos
+        setTimeout(() => {
+          paymentModal.classList.add('hidden');
+          investmentSuccessModal.classList.remove('hidden');
+        }, 2000);
+
+        return true;
+      } catch (error) {
+        console.error("Error verifying payment:", error);
+        alert('Error al verificar el pago: ' + error.message);
+        return false;
+      }
+    }
+
+    // Función para mostrar recomendaciones de IA
+    function showAIRecommendations() {
+      aiModal.classList.remove('hidden');
+    }
+
+    // Función para aplicar recomendaciones de IA
+    function applyAIRecommendation() {
+      alert('Portafolio configurado según recomendación de IA');
+      aiModal.classList.add('hidden');
+    }
+
+    // Event Listeners
+    registerBtn.addEventListener('click', () => {
+      // Validar formulario de registro aquí
+      showLoading('register');
+
+      // Simular registro exitoso
+      setTimeout(() => {
+        hideLoading('register');
+        showMainScreen();
+      }, 1500);
+    });
+
+    loginLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      showMainScreen();
+    });
+
+    togglePassword.addEventListener('click', () => {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePassword.innerHTML = '<i class="fas fa-eye-slash"></i>';
+      } else {
+        passwordInput.type = 'password';
+        togglePassword.innerHTML = '<i class="fas fa-eye"></i>';
+      }
+    });
+
+    // Navegación principal
+    navHome.addEventListener('click', showMainScreen);
+    navExplore.addEventListener('click', showExploreScreen);
+    navPortfolio.addEventListener('click', showPortfolioScreen);
+    navNotifications.addEventListener('click', showNotificationsScreen);
+
+    // Navegación desde explorar
+    navExploreHome.addEventListener('click', showMainScreen);
+    navExploreExplore.addEventListener('click', showExploreScreen);
+    navExplorePortfolio.addEventListener('click', showPortfolioScreen);
+    navExploreNotifications.addEventListener('click', showNotificationsScreen);
+
+    // Navegación desde talento
+    navTalentHome.addEventListener('click', showMainScreen);
+    navTalentExplore.addEventListener('click', showExploreScreen);
+    navTalentPortfolio.addEventListener('click', showPortfolioScreen);
+    navTalentNotifications.addEventListener('click', showNotificationsScreen);
+
+    // Navegación desde portafolio
+    navPortfolioHome.addEventListener('click', showMainScreen);
+    navPortfolioExplore.addEventListener('click', showExploreScreen);
+    navPortfolioPortfolio.addEventListener('click', showPortfolioScreen);
+    navPortfolioNotifications.addEventListener('click', showNotificationsScreen);
+
+    // Navegación desde notificaciones
+    navNotificationsHome.addEventListener('click', showMainScreen);
+    navNotificationsExplore.addEventListener('click', showExploreScreen);
+    navNotificationsPortfolio.addEventListener('click', showPortfolioScreen);
+    navNotificationsNotifications.addEventListener('click', showNotificationsScreen);
+
+    // Botón de retroceso en pantalla de talento
+    backBtnTalent.addEventListener('click', showExploreScreen);
+
+    // Talentos en explorar
+    talentItems.forEach(item => {
+      item.addEventListener('click', () => {
+        showTalentScreen();
+      });
+    });
+
+    // Botón de inversión
+    investBtn.addEventListener('click', () => {
+      if (!currentAccount) {
+        walletModal.classList.remove('hidden');
+        return;
+      }
+      investmentModal.classList.remove('hidden');
+      updateInvestmentSummary(100); // Valor por defecto
+    });
+
+    // Opciones de inversión
+    option100.addEventListener('click', () => {
+      investmentOptions.forEach(opt => {
+        opt.classList.remove('border-purple-500', 'bg-purple-50');
+        opt.classList.add('border-gray-300');
+      });
+      option100.classList.add('border-purple-500', 'bg-purple-50');
+      option100.classList.remove('border-gray-300');
+      customInvestment.value = 100;
+      updateInvestmentSummary(100);
+    });
+
+    option250.addEventListener('click', () => {
+      investmentOptions.forEach(opt => {
+        opt.classList.remove('border-purple-500', 'bg-purple-50');
+        opt.classList.add('border-gray-300');
+      });
+      option250.classList.add('border-purple-500', 'bg-purple-50');
+      option250.classList.remove('border-gray-300');
+      customInvestment.value = 250;
+      updateInvestmentSummary(250);
+    });
+
+    option500.addEventListener('click', () => {
+      investmentOptions.forEach(opt => {
+        opt.classList.remove('border-purple-500', 'bg-purple-50');
+        opt.classList.add('border-gray-300');
+      });
+      option500.classList.add('border-purple-500', 'bg-purple-50');
+      option500.classList.remove('border-gray-300');
+      customInvestment.value = 500;
+      updateInvestmentSummary(500);
+    });
+
+    option1000.addEventListener('click', () => {
+      investmentOptions.forEach(opt => {
+        opt.classList.remove('border-purple-500', 'bg-purple-50');
+        opt.classList.add('border-gray-300');
+      });
+      option1000.classList.add('border-purple-500', 'bg-purple-50');
+      option1000.classList.remove('border-gray-300');
+      customInvestment.value = 1000;
+      updateInvestmentSummary(1000);
+    });
+
+    // Monto personalizado de inversión
+    customInvestment.addEventListener('input', () => {
+      const amount = parseFloat(customInvestment.value) || 0;
+      investmentOptions.forEach(opt => {
+        opt.classList.remove('border-purple-500', 'bg-purple-50');
+        opt.classList.add('border-gray-300');
+      });
+      updateInvestmentSummary(amount);
+    });
+
+    // Confirmar inversión
+    confirmInvestment.addEventListener('click', () => {
+      const amount = parseFloat(customInvestment.value) || 100;
+      const paymentMethod = document.getElementById('payment-method').value;
+
+      if (paymentMethod === 'usdt') {
+        investmentModal.classList.add('hidden');
+        generatePaymentQR(amount);
+        paymentModal.classList.remove('hidden');
+        statusWaiting.classList.remove('hidden');
+        statusSuccess.classList.add('hidden');
+        checkPayment.classList.add('hidden');
+
+        // Simular verificación de pago después de 3 segundos
+        setTimeout(() => {
+          checkPayment.classList.remove('hidden');
+        }, 3000);
+      } else {
+        // Para otros métodos de pago (simulación)
+        showLoading('investment');
+
+        setTimeout(() => {
+          hideLoading('investment');
+          investmentModal.classList.add('hidden');
+          investmentSuccessModal.classList.remove('hidden');
+        }, 1500);
+      }
+    });
+
+    // Verificar pago
+    checkPayment.addEventListener('click', () => {
+      const amount = parseFloat(customInvestment.value) || 100;
+      checkPaymentStatus(amount);
+    });
+
+    // Categorías
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryBtns.forEach(b => {
+          b.classList.remove('bg-purple-700', 'text-white');
+          b.classList.add('bg-gray-100', 'text-gray-800');
+        });
+        btn.classList.add('bg-purple-700', 'text-white');
+        btn.classList.remove('bg-gray-100', 'text-gray-800');
+        // Aquí iría la lógica para filtrar talentos por categoría
+      });
+    });
+
+    // Conexión Wallet
+    metamaskOption.addEventListener('click', connectMetaMask);
+    walletconnectOption.addEventListener('click', () => alert('WalletConnect integration coming soon'));
+    coinbaseOption.addEventListener('click', () => alert('Coinbase Wallet integration coming soon'));
+    closeWallet.addEventListener('click', () => walletModal.classList.add('hidden'));
+    disconnectWallet.addEventListener('click', disconnectWalletHandler);
+
+    // Cerrar modales
+    closeInvestment.addEventListener('click', () => investmentModal.classList.add('hidden'));
+    cancelInvestment.addEventListener('click', () => investmentModal.classList.add('hidden'));
+
+    closePayment.addEventListener('click', () => paymentModal.classList.add('hidden'));
+    cancelPayment.addEventListener('click', () => paymentModal.classList.add('hidden'));
+
+    closeInvestmentSuccess.addEventListener('click', () => investmentSuccessModal.classList.add('hidden'));
+    closeInvestmentSuccessBtn.addEventListener('click', () => {
+      investmentSuccessModal.classList.add('hidden');
+      showPortfolioScreen();
+    });
+
+    closeAi.addEventListener('click', () => aiModal.classList.add('hidden'));
+
+    // Copiar dirección
+    copyAddress.addEventListener('click', () => {
+      navigator.clipboard.writeText(contractAddress);
+      alert('Dirección copiada al portapapeles');
+    });
+
+    // Recomendaciones IA
+    aiRecommendationBtn.addEventListener('click', showAIRecommendations);
+    applyRecommendation.addEventListener('click', applyAIRecommendation);
+
+    // Mostrar pantalla de registro al cargar
+    showRegisterScreen();
+  </script>
 </body>
 
 </html>
